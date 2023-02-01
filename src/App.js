@@ -1,8 +1,8 @@
-import logo from './logo.svg';
 import './App.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Home from './Pages/Home/Home/Home';
 import UserDetails from './Pages/UserDetails/UserDetails';
+import Users from './Pages/Users/Users';
 
 const router = createBrowserRouter([
   {
@@ -14,8 +14,15 @@ const router = createBrowserRouter([
     element: <Home></Home>
   },
   {
-    path: '/userDetails',
-    element: <UserDetails></UserDetails>
+    path: '/users',
+    element: <Users></Users>
+  },
+  {
+    path: '/user/:id',
+    element: <UserDetails></UserDetails>,
+    loader: async ({ params }) => {
+      return fetch(`https://jsonplaceholder.typicode.com/users/${params.id}`)
+    }
   }
 ])
 
